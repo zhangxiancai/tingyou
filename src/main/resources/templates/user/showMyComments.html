@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title th:if="${user!=null}" th:text="${user.username}+'的所有文章'"></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+
+
+</head>
+<body class="about">
+<style type="text/css">
+    .f-right {
+        float: right;
+        margin-left: 5px;
+    }
+
+   .foot{
+       margin-top: 15px;
+       background-color: gainsboro;
+       padding: 5px;
+   }
+
+    small{
+        color: gray;
+    }
+
+    @media (min-width: 768px) {
+        .foot{
+            margin-top: 15px;
+            background-color: gainsboro;
+            padding: 15px;
+        }
+    }
+</style>
+
+<nav class="nav navbar-default navbar-fixed-top" id="mynav">
+    <div class="navbar-header">
+        <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="user"><a href="/showUser"><h4><span class="glyphicon glyphicon-user">&thinsp;</span><span
+                th:text="${user.username}"></span></h4></a></div>
+    </div>
+    <ul class="collapse nav navbar-collapse navbar-nav" id="menu">
+        <li><a href="/">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>首页</h4>
+        </a></li>
+        <li><a href="/getLogin">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>登录</h4>
+        </a></li>
+        <li><a href="/registerUser">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>注册</h4>
+        </a></li>
+
+    </ul>
+</nav>
+<div class="container marg">
+    <div class="row">
+
+
+        <div th:each="comment : ${comments}" class="template">
+
+            <div class="head">
+                <div><small th:text="${comment.createTimeString}"></small></div>
+                <small>留言内容:</small>
+               <span th:text="${comment.commentContent}"></span>
+            </div>
+            <div class="body" th:if="${comment.commentUser.id ne 0}">
+                <a th:href="'/  ?id=' + ${comment.id}" class="f-right">删除</a>
+                <div class="clear"></div>
+            </div>
+            <div class="foot" th:if="${comment.preUaComment!=null}">
+                <p><small>回复&nbsp;</small><small th:text="${comment.preUaComment.commentUser.username}"></small><small>&nbsp;的留言:</small></p>
+                <p th:text="${comment.preUaComment.commentContent}"></p>
+            </div>
+            <div class="foot" th:if="${comment.preUaComment==null and comment.preCommentId == 0}">
+                <p><small>回复文章:</small></p>
+                <p><a th:if="${comment.article != null}" th:href="${'/articleContent?id='+comment.article.id}" th:text="${comment.article.title}"></a></p>
+                <p th:if="${comment.article == null}">文章已删除。。。</p>
+
+            </div>
+            <div class="foot" th:if="${comment.preUaComment==null and comment.preCommentId != 0}">
+                <p><small>上级回复已删除。。。</small></p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <script type="text/javascript">
+
+    </script>
+</body>
+</html>

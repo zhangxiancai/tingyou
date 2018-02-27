@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>/</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../static/css/public.css"/>
+</head>
+<body>
+<style type="text/css">
+    .template1 {
+        background: white;
+        position: absolute;
+        padding: 20px;
+        display: none;
+    }
+    .responsive1{
+        width: 100%;
+        height: 150px;
+    }
+</style>
+<span id="uuComment">留言</span>
+<div class="template1 " id="writeComment1">
+    <p>留言:</p>
+    <p><textarea class="responsive1" name="content" id="content1"></textarea></p>
+    <input  type="button" value="保存" id="saveComment1"/>
+</div>
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script type="text/javascript">
+    $("#writeComment1").width($(window).width()*0.6);
+
+    var atop =($(window).height()-$("#writeComment1").height())*0.4;
+    var aleft =($(window).width()-$("#writeComment1").width())*0.4;
+    $("#writeComment1").css("top",atop+"px").css("left",aleft+"px");
+    $("body").css("background","gray");
+
+    $("#saveComment1").click(function () {
+        $("#writeComment1").hide();
+    });
+
+    $("#uuComment").click(function () {
+        $("#writeComment1").show();
+    });
+</script>
+</body>
+</html>

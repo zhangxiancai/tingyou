@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>所有文章</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+
+
+
+</head>
+<body class="about">
+<style type="text/css">
+    .font {
+        color: #b4bbc0;
+        font-size: 15px;
+        margin-left: 5px;
+    }
+
+    .img-three {
+        width: 33%;
+        float: left;
+        padding: 2px;
+    }
+
+    p{
+        text-indent: 2em;
+    }
+
+</style>
+
+<nav class="nav navbar-default navbar-fixed-top" id="mynav">
+    <div class="navbar-header">
+        <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="user"><a href="/showUser"><h4><span class="glyphicon glyphicon-user">&thinsp;</span><span th:text="${user.username}"></span></h4></a></div>
+
+    </div>
+
+    <ul class="collapse nav navbar-collapse navbar-nav" id="menu">
+        <li><a href="/">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>首页</h4>
+        </a></li>
+        <li><a href="/getLogin">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>登录</h4>
+        </a></li>
+        <li><a href="/registerUser">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>注册</h4>
+        </a></li>
+
+    </ul>
+</nav>
+<div class="container marg">
+    <div class="row">
+
+        <div th:each="item : ${articles}" class="template">
+
+            <a th:href="${'/articleContent?id=' + item.id }">
+                <h4 th:text="${item.title}">title</h4>
+            </a>
+             <p th:text="${item.partContent}"></p>
+            <div th:if="${item.imageNames.size() gt 0}" class="img-center" >
+                <div class="img-three"  th:each="imageName : ${item.imageNames}">
+                    <img th:src="${'/userImages/' + imageName}" alt="" class="img-responsive"/>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="foot">
+                <span class="font" th:text="${item.articleUser.username}"></span>
+                <span class="font">| 蓝丝带:<span th:text="${item.ribbonCount}"></span></span>
+                <span class="f-right font">| 浏览数:<span th:text="${item.browseCount}"></span></span>
+                <span class="font f-right" th:text="${item.createTimeString}"></span>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/showArticles.js"></script>
+
+</body>
+</html>

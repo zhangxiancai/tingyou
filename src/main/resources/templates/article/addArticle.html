@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>写文章</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+    <link rel="stylesheet" href="css/addarticle.css"/>
+
+</head>
+<body class="about">
+<style type="text/css">
+    .responsive {
+        width: 100%;
+        height: 300px;
+    }
+</style>
+<nav class="nav navbar-default navbar-fixed-top" id="mynav">
+    <div class="navbar-header">
+        <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="user"><a href="/showUser"><h4><span class="glyphicon glyphicon-user">&thinsp;</span><span
+                th:text="${user.username}"></span></h4></a></div>
+
+
+    </div>
+    <ul class="collapse nav navbar-collapse navbar-nav" id="menu">
+        <li><a href="/">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>首页</h4>
+        </a></li>
+        <li><a href="/getLogin">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>登录</h4>
+        </a></li>
+        <li><a href="/registerUser">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>注册</h4>
+        </a></li>
+
+    </ul>
+</nav>
+<div class="container marg">
+    <div class="row">
+        <div class="template">
+            <form action="/createArticle" method="post" enctype="multipart/form-data">
+                <p> 题目:<input type="text" name="title" th:text="${title}"> </input> </p>
+
+                <p> 内容:<textarea class="responsive" name="content" id="content" th:text="${content}"></textarea></p>
+
+                <p><input type="file" name="file" id="image" multiple="multiple"/></p>
+
+
+                <input type="submit" value="保存"/>
+            </form>
+            <!--<div class="pushImage">-->
+            <!--<p><input type="file" name="newimage" id="image"/></p>-->
+            <!--<button id="add">存档</button>-->
+            <!--</div>-->
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<!--<script type="text/javascript">-->
+<!--$(document).ready(function () {-->
+<!--var reader = new FileReader();-->
+<!--$("#image").change(function () {-->
+<!--var file = this.files[0];-->
+
+<!--reader.readAsBinaryString(file);-->
+
+<!--alert(reader.Result);-->
+
+<!--})-->
+
+<!--$("#add").click(function () {-->
+<!--$.ajax({url:"/pushImage",context: ,success:function(Result){-->
+<!--$("#content").append(Result);-->
+<!--}});-->
+<!--// var file = $("#image").file.name;-->
+<!--//-->
+<!--//-->
+<!--//     alert(file);-->
+
+
+<!--//alert("lijian");-->
+<!--});-->
+<!--});-->
+<!--</script>-->
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>首页</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+</head>
+
+<body class="about bg">
+
+<style type="text/css">
+    .bg {
+        background-image: url("images/mrlm1.jpg");
+        background-repeat: no-repeat;
+
+        background-size: auto, 100%;
+        background-position: top, left;
+        /*border: 1px solid black;*/
+    }
+
+    .template1 {
+        text-align: center;
+        color: white;
+        background-color: black;
+        padding: 20px;
+        margin: 10px auto;
+        width: 400px;
+        opacity: 0.4;
+    }
+
+    @media (max-width: 768px) {
+        .template1 {
+            text-align: center;
+            color: white;
+            background-color: black;
+            padding: 20px;
+            margin: 10px auto;
+            opacity: 0.4;
+            width: 300px;
+        }
+    }
+</style>
+
+<div class="container marg">
+    <div class="row" id="size">
+
+        <div class="template1 ">
+            <a href="/showArticles"><h3>文章</h3></a>
+            <p>我们整理或原创的文字</p>
+
+        </div>
+
+        <div class="template1">
+            <a href="/showLinks"><h3>链接</h3></a>
+            <p>大家分享的有关健哥的一些链接</p>
+        </div>
+        <div class="template1">
+            <a href="/showUser"><h3>我的</h3></a>
+            <p>管理自己的文章和链接</p>
+        </div>
+    </div>
+    <span class="hidden" th:text="${message}" id="message"></span>
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+    // $(window).resize(function () {
+    //
+    //     var size=window.innerWidth+"px,"+window.innerHeight+"px";
+    //     $("body").css("background_size",size);
+    // })
+
+    var size = (window.innerHeight - 538) * 0.5;
+    $("#size").css("padding-top", size + "px");
+    // var atext = $("#message").text();
+    // $("#message").text("no");
+    // var atext1 = $("#message").text();
+    // if (atext == "ok") {
+    //     alert("登录成功");
+    //
+    // }
+</script>
+</body>
+</html>

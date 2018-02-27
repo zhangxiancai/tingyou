@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>我分享的链接</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+
+
+</head>
+<body class="about">
+<nav class="nav navbar-default navbar-fixed-top" id="mynav">
+    <div class="navbar-header">
+        <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="user"><a href="/showUser"><h4><span class="glyphicon glyphicon-user">&thinsp;</span><span th:text="${user.username}"></span></h4></a></div>
+
+    </div>
+    <ul class="collapse nav navbar-collapse navbar-nav"  id="menu" >
+        <li><a href="/">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>首页</h4>
+        </a></li>
+        <li><a href="/getLogin">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>登录</h4>
+        </a></li>
+        <li><a href="/registerUser">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>注册</h4>
+        </a></li>
+
+    </ul>
+</nav>
+<div class="container marg">
+    <div class="row">
+
+
+        <div th:each="item : ${links}" class="template">
+
+            <a th:href="${item.link}" target="_Blank">
+                <h4 th:text="${item.content}">content</h4>
+            </a>
+            <small th:text="${username}"></small>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+
+
+</body>
+</html>

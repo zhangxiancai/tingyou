@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title th:text="${article.title}"></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+
+
+</head>
+<body class="about">
+<style type="text/css">
+    .linefeed {
+        white-space: pre-wrap;
+    }
+
+    .comment_whole {
+        background-color: gainsboro;
+        padding: 15px;
+        padding-bottom: 20px;
+        margin: 5px;
+    }
+    .comment_whole1 {
+        background-color: gainsboro;
+        padding: 15px;
+        padding-bottom: 20px;
+        margin: 5px;
+        border-top: 1px solid gray;
+    }
+    .comment_head {
+        font-size: small;
+        color: gray;
+
+    }
+
+    .comment_body {
+        white-space: pre-wrap;
+    }
+
+    .comment_foot {
+        font-size: small;
+
+        color: gray;
+        clear: both;
+    }
+
+    .head {
+        margin-top: 15px;
+        margin-bottom: 30px;
+        clear: both;
+    }
+
+    .font {
+        color: #b4bbc0;
+        font-size: 15px;
+        margin-left: 5px;
+    }
+
+    .responsive {
+        width: 100%;
+        height: 100px;
+    }
+   .wid{
+       width: 100%;
+   }
+
+    p{
+        font-size: 16px;
+        line-height: 26px;
+    }
+</style>
+
+<nav class="nav navbar-default navbar-fixed-top" id="mynav">
+    <div class="navbar-header">
+        <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="user"><a href="/showUser"><h4><span class="glyphicon glyphicon-user">&thinsp;</span><span th:text="${user.username}"></span></h4></a></div>
+
+    </div>
+    <ul class="collapse nav navbar-collapse navbar-nav" id="menu">
+        <li><a href="/">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>首页</h4>
+        </a></li>
+        <li><a href="/getLogin">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>登录</h4>
+        </a></li>
+        <li><a href="/registerUser">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>注册</h4>
+        </a></li>
+
+    </ul>
+</nav>
+<div class="container marg">
+    <div class="row">
+        <div class="template">
+
+            <h3 th:text="${article.title}"></h3>
+            <div class="head">
+                <span class="font" th:text="${article.articleUser.username}"></span>
+                <span class="font">| <span id="ribbon">蓝丝带</span>:<span id="ribbonCount"
+                                                                        th:text="${article.ribbonCount}"></span></span>
+                <div class="f-right">
+                    <span class="f-right font">| 浏览数:<span th:text="${article.browseCount}"></span></span>
+                </div>
+                <div class="f-right">
+                    <span class="font" th:text="${article.createTimeString}"></span>
+                </div>
+
+            </div>
+
+            <p class="linefeed" th:text="${article.content}"></p>
+            <div th:each="imageName : ${article.imageNames}" class="marg">
+                <img th:src="${'/userImages/' + imageName}" alt="" class="img-responsive wid"/>
+            </div>
+        </div>
+
+        <div class="template" id="writeComment">
+            <p>留言:</p>
+            <p><textarea class="responsive" name="content" id="content"></textarea></p>
+            <input type="button" value="保存" id="saveComment"/>
+        </div>
+        <div class="template">
+            <p>大家的留言:</p>
+            <div id="comments"></div>
+
+        </div>
+
+
+    </div>
+</div>
+
+<!---->
+
+<span th:text="${article.id}" class="hidden" id="articleId"></span>
+<span th:text="${user.id}" class="hidden" id="userId"></span>
+<!---->
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/articleContent.js"></script>
+<script type="text/javascript">
+    var articleId = $("#articleId").text();
+    var userId = $("#userId").text();
+    var spanText;
+    getComments();
+    $.ajax({
+        url: "/getRibbonKey", data: {userId: userId, articleId: articleId}, type: 'post', success: function (temp) {
+            if (temp == "is") {
+                $("#ribbon").css("color", "blue");
+            }
+
+        }
+    });
+
+    //点击蓝丝带
+    $("#ribbon").click(function () {
+        var color = $("#ribbon").css("color");
+        var temp;
+
+        if (color == "rgb(180, 187, 192)") {
+            $("#ribbon").css("color", "blue");
+            temp = "is";
+        } else {
+            $("#ribbon").css("color", "rgb(180, 187, 192)")
+            temp = "no";
+        }
+        $.ajax({
+            url: "/doRibbon", data: {temp: temp, articleId: articleId}, type: 'post', success: function () {
+                var ribbonCount = $("#ribbonCount").text();
+                if (temp == "is") {
+                    $("#ribbonCount").text(Number(ribbonCount) + 1);
+                } else {
+                    $("#ribbonCount").text(Number(ribbonCount) - 1);
+                }
+
+            }
+        });
+    });
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title th:if="${user!=null}" th:text="${user.username}+'的所有文章'"></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+
+
+</head>
+<body class="about">
+<style type="text/css">
+    .f-right{
+        float: right;
+        margin-left: 5px;
+    }
+
+    .font{
+        color: #b4bbc0;
+        font-size: 15px;
+        margin-left: 5px;
+    }
+    .title_font{
+        font-size: 20px;
+    }
+    .img-three{
+        width: 33%;
+        float: left;
+        padding: 2px;
+    }
+</style>
+<!--<div class="modal fade" tabindex="-1" role="dialog" id="myModal">-->
+    <!--<div class="modal-dialog" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 class="modal-title">lsd.tingyou.xyz</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<p>确定删除吗</p>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">不</button>-->
+                <!--<button type="button" class="btn btn-primary">-->
+                    <!--<a th:href="/deleteArticle?id=" >删除</a>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+<nav class="nav navbar-default navbar-fixed-top" id="mynav">
+    <div class="navbar-header">
+        <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="user"><a href="/showUser"><h4><span class="glyphicon glyphicon-user">&thinsp;</span><span th:text="${user.username}"></span></h4></a></div>
+    </div>
+    <ul class="collapse nav navbar-collapse navbar-nav"  id="menu" >
+        <li><a href="/">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>首页</h4>
+        </a></li>
+        <li><a href="/getLogin">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>登录</h4>
+        </a></li>
+        <li><a href="/registerUser">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>注册</h4>
+        </a></li>
+
+    </ul>
+</nav>
+<div class="container marg">
+    <div class="row">
+
+
+
+        <div th:each="item : ${articles}" class="template">
+
+            <a th:href="${'/articleContent?id=' + item.id }">
+                <h4 th:text="${item.title}">title</h4>
+            </a>
+           <div th:if="${user.id ne 0}">
+               <a th:href="'/deleteArticle?id=' + ${item.id}" class="f-right">删除</a>
+               <div class="clear"></div>
+           </div>
+            <p th:text="${item.partContent}"></p>
+            <div th:if="${item.imageNames.size() gt 0}" class="img-center" >
+                <div class="img-three"  th:each="imageName : ${item.imageNames}">
+                    <img th:src="${'/userImages/' + imageName}" alt="" class="img-responsive"/>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="foot ">
+                <span class="font" th:text="${item.articleUser.username}"></span>
+                <span class="font">| 蓝丝带:<span th:text="${item.ribbonCount}"></span></span>
+                <span class="f-right font">| 浏览数:<span th:text="${item.browseCount}"></span></span>
+                <span class="font f-right" th:text="${item.createTimeString}"></span>
+                <div class="clear"></div>
+            </div>
+        </div>
+                <!--<div th:each="item : ${articles}" class="template">-->
+                    <!--<div class="clear">-->
+                        <!--<a class="title_font" th:href="${'/articleContent?id=' + item.id }" th:text="${item.title}" >-->
+                        <!--</a>-->
+                        <!--<a th:href="'/deleteArticle?id=' + ${item.id}" class="f-right">删除</a>-->
+                    <!--</div>-->
+
+                    <!--<div th:if="${item.imageNames.size() gt 0}" class="clear height1">-->
+                        <!--<div class="img-three" id="height2" th:each="imageName : ${item.imageNames}">-->
+
+                            <!--<img  th:src="${'/userImages/' + imageName}" alt="" class="img-responsive"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="clear">-->
+                        <!--<span class="font" th:text="${item.articleUser.username}"></span>-->
+                        <!--<span class="font">| 蓝丝带:<span th:text="${item.ribbonCount}"></span></span>-->
+                        <!--<div class="f-right">-->
+                            <!--<span class="f-right font">| 浏览数:<span  th:text="${item.browseCount}"></span></span>-->
+                        <!--</div>-->
+                        <!--<div class="f-right">-->
+                            <!--<span class="font" th:text="${item.createTimeString}"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+
+
+
+</div>
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
