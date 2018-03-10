@@ -48,7 +48,11 @@ public class ArticleServiceImpl implements ArticleService {
                 continue;
             }
             String fileName = System.currentTimeMillis() + file.getOriginalFilename();
-            String fileLocation = "E:\\images\\" + fileName;
+            String location=System.getenv("IMAGE_LOCATION");
+            if(location==null){
+                location="D:/images/";
+            }
+            String fileLocation = location+ fileName;
             FileUtil.writeToLocal(file, fileLocation);
             articleImageMapper.insert(fileName, articleId);
 
