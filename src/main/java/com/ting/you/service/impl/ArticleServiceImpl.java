@@ -135,7 +135,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     private Article changeArticle(Article article) {
 
-        List<String> imageNames = articleImageMapper.selectImageNameByArticleId(article.getId());
+        //List<String> imageNames = articleImageMapper.selectImageNameByArticleId(article.getId());
+        List<String> imageNames = new ArrayList<>();
+        imageNames.add("test");
         if (imageNames.size() > 3) {
             List<String> imageNames1 = new ArrayList<>();
             for (int i = 0; i < 3; i++) {//列表展示时最多显示三个
