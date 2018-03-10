@@ -11,7 +11,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         String location=System.getenv("IMAGE_LOCATION");
         if(location==null){
-            location="D:/images/";
+            location="D:\\images\\";
         }
         registry.addResourceHandler("/userImages/**").addResourceLocations(location);
         super.addResourceHandlers(registry);

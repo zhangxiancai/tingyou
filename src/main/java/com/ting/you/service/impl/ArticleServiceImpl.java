@@ -50,7 +50,7 @@ public class ArticleServiceImpl implements ArticleService {
             String fileName = System.currentTimeMillis() + file.getOriginalFilename();
             String location=System.getenv("IMAGE_LOCATION");
             if(location==null){
-                location="D:/images/";
+                location="D:\\images\\";
             }
             String fileLocation = location+ fileName;
             FileUtil.writeToLocal(file, fileLocation);
@@ -93,9 +93,12 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.deletebyId(articleId);
         List<String> imageNames = articleImageMapper.selectImageNameByArticleId(articleId);
         String fileLocation = null;
-
+        String location=System.getenv("IMAGE_LOCATION");
+        if(location==null){
+            location="D:\\images\\";
+        }
         for (String item : imageNames) {
-            fileLocation = "E:\\images\\" + item;
+            fileLocation = location + item;
             FileUtil.deleteFile(fileLocation);//删除文章对应的图片
         }
 
