@@ -4,6 +4,7 @@ import com.ting.you.dao.ArticleImageMapper;
 import com.ting.you.dao.ArticleMapper;
 import com.ting.you.dao.UaRibbonMapper;
 import com.ting.you.dao.UserMapper;
+import com.ting.you.global.GlobalMy;
 import com.ting.you.pojo.Article;
 import com.ting.you.pojo.User;
 import com.ting.you.service.ArticleService;
@@ -47,12 +48,9 @@ public class ArticleServiceImpl implements ArticleService {
             if ("".equals(file.getOriginalFilename())) {
                 continue;
             }
-            String fileName = System.currentTimeMillis() + file.getOriginalFilename();
-            String location=System.getenv("IMAGE_LOCATION");
-            if(location==null){
-                location="D:\\images\\";
-            }
-            String fileLocation = location+ fileName;
+            String fileName = System.currentTimeMillis() + "-"+file.getOriginalFilename();
+
+            String fileLocation = GlobalMy.LOCATION+ fileName;
             FileUtil.writeToLocal(file, fileLocation);
             articleImageMapper.insert(fileName, articleId);
 
@@ -93,12 +91,9 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.deletebyId(articleId);
         List<String> imageNames = articleImageMapper.selectImageNameByArticleId(articleId);
         String fileLocation = null;
-        String location=System.getenv("IMAGE_LOCATION");
-        if(location==null){
-            location="D:\\images\\";
-        }
+
         for (String item : imageNames) {
-            fileLocation = location + item;
+            fileLocation = GlobalMy.LOCATION + item;
             FileUtil.deleteFile(fileLocation);//删除文章对应的图片
         }
 
@@ -135,9 +130,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     private Article changeArticle(Article article) {
 
-        //List<String> imageNames = articleImageMapper.selectImageNameByArticleId(article.getId());
-        List<String> imageNames = new ArrayList<>();
-        imageNames.add("test");
+        List<String> imageNames = articleImageMapper.selectImageNameByArticleId(article.getId());
+//        List<String> imageNames = new ArrayList<>();
+//        imageNames.add("test");
         if (imageNames.size() > 3) {
             List<String> imageNames1 = new ArrayList<>();
             for (int i = 0; i < 3; i++) {//列表展示时最多显示三个
