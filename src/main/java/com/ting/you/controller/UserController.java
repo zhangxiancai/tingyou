@@ -49,7 +49,7 @@ public class UserController {
             return "redirect:/";//未登录则返回首页默认登陆
         }
         model.addAttribute("user", user);
-        return "/user/showUser";
+        return "user/showUser";
     }
 
     @RequestMapping("/registerUser")

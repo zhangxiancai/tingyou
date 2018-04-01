@@ -5,4 +5,7 @@ public class GlobalConstant {
     public static String MYSQL_IP  ="MYSQL_IP";
 
     public static String IMAGES_LOCATION  ="IMAGES_LOCATION";
+
+    public static String MYSQL_PASSWORD  ="MYSQL_PASSWORD";
+
 }

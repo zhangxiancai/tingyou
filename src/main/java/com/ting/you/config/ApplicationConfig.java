@@ -18,12 +18,17 @@ public class ApplicationConfig {
     public DataSource getDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         String ip = System.getenv(GlobalConstant.MYSQL_IP);
+        String password = System.getenv(GlobalConstant.MYSQL_PASSWORD);
         if(ip==null){
             ip="127.0.0.1";
         }
-        dataSource.setUrl("jdbc:mysql://"+ip+":3306/tingyou?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true");
+        if(password==null){
+            password="123456";
+        }
+        System.out.println(ip+"::"+password);
+        dataSource.setUrl("jdbc:mysql://"+ip+":3306/tingyou?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
         dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setPassword(password);
 
         return dataSource;
     }
