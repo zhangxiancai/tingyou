@@ -60,7 +60,7 @@ public class UaController {
     public String writeUuComment(int commentId, HttpServletRequest request, Model model){
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
 
         model.addAttribute("comment",uaService.showComment(commentId));
@@ -72,7 +72,7 @@ public class UaController {
     public String createUuComment(int commentId,String commentContent, HttpServletRequest request, Model model){
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         UaComment uaComment = uaService.createUuComment(commentId,user,commentContent);
         String url = "redirect:/articleContent?id="+uaComment.getArticleId();
@@ -83,7 +83,7 @@ public class UaController {
     public String showMyComments( HttpServletRequest request, Model model){
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
        List<UaComment> uaComments = uaService.showMyComments(user.getId());
         model.addAttribute("comments",uaComments);
@@ -96,7 +96,7 @@ public class UaController {
     public String deleteComment( HttpServletRequest request, Model model,int id){
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         uaService.deleteComment(id,user);
 

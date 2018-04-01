@@ -56,13 +56,13 @@
             <a href="/addLink"><h4><span class="glyphicon glyphicon-share"></span>&nbsp;&nbsp;分享链接</h4></a>
         </div>
         <div class="template">
-            <a href="/showMyComments"><h4 th:text="${user.username}+' 的留言'"></h4></a>
+            <a href="/showMyComments"><h4 th:text="'>> '+${user.username}+' 的留言'"></h4></a>
         </div>
         <div class="template">
-            <a href="/showMyArticles"><h4 th:text="${user.username}+' 整理或原创的文章'"></h4></a>
+            <a href="/showMyArticles"><h4 th:text="'>> '+${user.username}+' 整理或原创的文章'"></h4></a>
         </div>
         <div class="template">
-            <a href="/showMyLinks"><h4 th:text="${user.username}+' 分享的链接'"></h4></a>
+            <a href="/showMyLinks"><h4 th:text="'>> '+${user.username}+' 分享的链接'"></h4></a>
         </div>
 
     </div>

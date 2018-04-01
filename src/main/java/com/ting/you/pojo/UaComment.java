@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 public class UaComment {
+    //将Uacomment视为Comment，修改太麻烦
     int id;
     int userId;
     int preCommentId;

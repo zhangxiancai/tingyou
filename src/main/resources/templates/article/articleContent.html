@@ -119,7 +119,7 @@
 
             <p class="linefeed" th:text="${article.content}"></p>
             <div th:each="imageName : ${article.imageNames}" class="marg">
-                <img th:src="${'/userImages/' + imageName}" alt="" class="img-responsive wid"/>
+                <img th:src="${'/userImages/' + imageName}" alt="找不到图片" class="img-responsive wid"/>
             </div>
         </div>
 

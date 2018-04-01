@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>manage</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+
+
+</head>
+<body class="aboutManage">
+
+<style type="text/css">
+    .form {
+        padding: 0px auto;
+    }
+    p{
+        width: 50%;
+        margin: 10px auto;
+    }
+
+</style>
+
+
+<div class="marg">
+    <div class="container">
+        <div class="row">
+         <div class="template">
+             <h3>进入管理页面前请先登录:</h3>
+         </div>
+
+            <div class="template">
+                <form class="form" action="/manageDoLogin" method="post" >
+
+                    <p>用户名:<input type="text" name="username" > </input> </p>
+                    <p>密码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="responsive" name="password"> </input></p>
+                    <p th:text="${message}"></p>
+                    <p><input  type="submit" value="登录"/></p>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+
+
+</body>
+</html>

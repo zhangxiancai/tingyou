@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>备份网站图片</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+
+
+</head>
+<body class="aboutManage">
+
+<style type="text/css">
+    .form {
+        padding: 0px auto;
+    }
+    p{
+        width: 50%;
+        margin: 10px auto;
+    }
+
+    .center{
+        text-align: center;
+    }
+</style>
+
+
+<div class="marg">
+    <div class="container">
+        <div class="row">
+            <div class="template">
+                <h4><a href="/manageGoMain">回到管理主页>></a></h4>
+            </div>
+
+            <div th:each="articleImage : ${articleImages}" class="template">
+                <h4 th:text="${'id:'+articleImage.id}"></h4>
+                <h4 th:text="${'name:'+articleImage.imageName}"></h4>
+                <img th:src="${'/userImages/' + articleImage.imageName}" alt="找不到图片" class="img-responsive"/>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+
+
+</body>
+</html>

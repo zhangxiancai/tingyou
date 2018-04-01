@@ -93,7 +93,7 @@
             <p th:text="${item.partContent}"></p>
             <div th:if="${item.imageNames.size() gt 0}" class="img-center" >
                 <div class="img-three"  th:each="imageName : ${item.imageNames}">
-                    <img th:src="${'/userImages/' + imageName}" alt="" class="img-responsive"/>
+                    <img th:src="${'/userImages/' + imageName}" alt="找不到图片" class="img-responsive"/>
                 </div>
                 <div class="clear"></div>
             </div>

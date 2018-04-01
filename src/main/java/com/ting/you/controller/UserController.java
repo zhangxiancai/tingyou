@@ -46,7 +46,7 @@ public class UserController {
 
         User user = (User)request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         model.addAttribute("user", user);
         return "user/showUser";

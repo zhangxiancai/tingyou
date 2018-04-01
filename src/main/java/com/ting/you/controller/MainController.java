@@ -18,7 +18,7 @@ public class MainController {
     public String getMain(HttpServletRequest request, Model model){
         User user = (User) request.getSession().getAttribute("user");
         if (user == null){
-            user= userService.selectById(0);//默认账户
+            user= userService.showById(0);//默认账户
             request.getSession().setAttribute("user",user);
         }
         model.addAttribute("user",user);

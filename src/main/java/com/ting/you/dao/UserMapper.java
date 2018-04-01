@@ -13,7 +13,7 @@ public interface UserMapper {
     User selectById(int id);
 
     @Select("SELECT * FROM user ")
-    List<User> selectAll();
+    List<User> selectAllUser();
 
     @Update("update user set username=#{username},password=#{password} where id =#{id}")
     User update(@Param("username") String username, @Param("password") String password, @Param("id") int id);

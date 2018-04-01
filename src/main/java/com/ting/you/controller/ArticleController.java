@@ -36,7 +36,7 @@ public class ArticleController {
         List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("file");
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
             articleService.createArticle(title, content, files, user);
 
@@ -47,7 +47,7 @@ public class ArticleController {
     public String showArticle(HttpServletRequest request,Model model) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         List<Article> articles = articleService.showArticles();
 
@@ -61,7 +61,7 @@ public class ArticleController {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         model.addAttribute("user", user);
         return "article/addArticle";
@@ -71,7 +71,7 @@ public class ArticleController {
     public String articleContent(HttpServletRequest request,Model model, int id) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         Article article = articleService.getArticleContent(id);
         articleMapper.addOneToBrowseCount(id);//浏览数加一
@@ -85,7 +85,7 @@ public class ArticleController {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         List<Article> articles = articleService.showMyArticles(user);
         model.addAttribute("articles", articles);
@@ -97,7 +97,7 @@ public class ArticleController {
     public String deleteArticle(HttpServletRequest request, int id) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         articleService.deleteArticle(id, user);
         return "redirect:showMyArticles";

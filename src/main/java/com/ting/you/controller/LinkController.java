@@ -24,7 +24,7 @@ public class LinkController {
     public String showLinks(HttpServletRequest request,Model model) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         List<Link> links = linkMapper.selectAll();
         for (Link link:links) {
@@ -41,7 +41,7 @@ public class LinkController {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         model.addAttribute("user",user);
         return "link/addLink";
@@ -60,7 +60,7 @@ public class LinkController {
     public String showMyLinks(HttpServletRequest request,Model model){
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登陆
+            return "redirect:/";//未登录则返回首页默认登录
         }
         List<Link> links = linkMapper.selectByUserId(user.getId());
         model.addAttribute("links",links);

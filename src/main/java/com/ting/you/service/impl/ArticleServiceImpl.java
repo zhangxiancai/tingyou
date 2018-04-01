@@ -85,9 +85,29 @@ public class ArticleServiceImpl implements ArticleService {
     public void deleteArticle(int articleId, User user) {
 
         Article article = articleMapper.selectById(articleId);
+        if (user.getId()==0) {
+            return;
+        }
         if (article.getUserId() != user.getId()) {
             return;
         }
+        articleMapper.deletebyId(articleId);
+        List<String> imageNames = articleImageMapper.selectImageNameByArticleId(articleId);
+        String fileLocation = null;
+
+        for (String item : imageNames) {
+            fileLocation = GlobalMy.LOCATION + item;
+            FileUtil.deleteFile(fileLocation);//删除文章对应的图片
+        }
+
+        articleImageMapper.deletebyArticleId(articleId);//删除文章对应的数据库图片记录
+
+    }
+
+    @Transactional
+    @Override
+    public void manageDoDeleteArticle(int articleId) {
+
         articleMapper.deletebyId(articleId);
         List<String> imageNames = articleImageMapper.selectImageNameByArticleId(articleId);
         String fileLocation = null;
@@ -105,6 +125,11 @@ public class ArticleServiceImpl implements ArticleService {
     public Article getArticleContent(int articleId) {
         Article article = articleMapper.selectById(articleId);
         List<String> imageNames = articleImageMapper.selectImageNameByArticleId(articleId);
+        Date date = article.getCreateTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+        String date1 = sdf.format(date);//设置特定格式时间字符串
+
+        article.setCreateTimeString(date1);
         article.setImageNames(imageNames);
         article.setArticleUser(userMapper.selectById(article.getUserId()));
         return article;

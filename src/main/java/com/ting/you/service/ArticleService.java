@@ -20,6 +20,9 @@ public interface ArticleService {
     void deleteArticle(int articleId, User user);
 
 
+    @Transactional
+    void manageDoDeleteArticle(int articleId);
+
     Article getArticleContent(int articleId);
 
     @Transactional

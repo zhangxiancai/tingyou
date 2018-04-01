@@ -116,6 +116,11 @@ public class UaServiceImpl implements UaService {
         String date1 =sdf.format(date);
         User user=userMapper.selectById(uaComment.getUserId());
 
+        if( user==null ){
+            user= new User();
+            user.setUsername("账号已注销");//
+        }
+
         List<UaComment> uaComment1s = uaCommentMapper.selectBypreCommentId(uaComment.getId());
         int count = getChildCountByComment(uaComment,uaComment1s);
         uaComment.setCreateTimeString(date1);
