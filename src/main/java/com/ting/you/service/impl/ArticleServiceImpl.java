@@ -67,6 +67,25 @@ public class ArticleServiceImpl implements ArticleService {
         }
         return articles;
     }
+    @Override
+    public List<Article> showArticlesByTemp(int start,int size) throws IOException {
+
+        List<Article> articles = articleMapper.selectAllByTemp(start, size);
+        for (Article article : articles) {
+            changeArticle(article);
+        }
+        return articles;
+    }
+
+    @Override
+    public List<Article> showArticlesByDescTempLike(int start,int size,String like,String desc) throws IOException {
+
+        List<Article> articles = articleMapper.selectAllByDescTempLike(start,size,like,desc);
+        for (Article article : articles) {
+            changeArticle(article);
+        }
+        return articles;
+    }
 
 
     @Override

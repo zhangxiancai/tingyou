@@ -14,7 +14,7 @@
 <style type="text/css">
     .responsive {
         width: 100%;
-        height: 300px;
+        height: 200px;
     }
 </style>
 <nav class="nav navbar-default navbar-fixed-top" id="mynav">
@@ -41,14 +41,17 @@
             <!--<span class="glyphicon glyphicon-home"></span>-->
             <h4>注册</h4>
         </a></li>
-
+        <li><a href="/about">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>关于</h4>
+        </a></li>
     </ul>
 </nav>
 <div class="container marg">
     <div class="row">
         <div class="template">
             <form action="/createLink" method="post" enctype="multipart/form-data">
-                <p> 链接:<input type="text" name="link" > </input> </p>
+                <p> 链接:<input type="text" name="link" placeholder="请加http(s)://前缀"> </input> </p>
 
                 <p> 为该链接添加描述:<textarea class="responsive" name="content" id="content"></textarea></p>
 

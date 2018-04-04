@@ -4,30 +4,35 @@
     <meta charset="UTF-8"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <title>注册</title>
+    <title>关于</title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/public.css"/>
 
 
+
 </head>
 <body class="about">
-
 <style type="text/css">
-    .form {
-    padding: 0px auto;
+    .linefeed {
+        white-space: pre-wrap;
+        font-size: 16px;
+        line-height: 26px;
     }
-    p{
-        width: 50%;
-        margin: 10px auto;
-    }
-    .marg{
-        margin-top: 20px;
-    }
-    .user{
-        margin-left:10px;
-        margin-top: 20px;
+
+.title{
+
+    padding: 10px;
+}
+    .template1{
+           background-color: white;
+           padding: 10px;
+           margin: 20px;
+       }
+    .template2{
+        padding:20px;
     }
 </style>
+
 <nav class="nav navbar-default navbar-fixed-top" id="mynav">
     <div class="navbar-header">
         <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
@@ -36,10 +41,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-
+        <div class="user"><a href="/showUser"><h4><span class="glyphicon glyphicon-user">&thinsp;</span><span th:text="${user.username}"></span></h4></a></div>
 
     </div>
-    <ul class="collapse nav navbar-collapse navbar-nav"  id="menu" >
+
+    <ul class="collapse nav navbar-collapse navbar-nav" id="menu">
         <li><a href="/">
             <!--<span class="glyphicon glyphicon-home"></span>-->
             <h4>首页</h4>
@@ -52,44 +58,36 @@
             <!--<span class="glyphicon glyphicon-home"></span>-->
             <h4>注册</h4>
         </a></li>
+
         <li><a href="/about">
             <!--<span class="glyphicon glyphicon-home"></span>-->
             <h4>关于</h4>
         </a></li>
     </ul>
 </nav>
+<div class="container marg">
+    <div class="row">
 
-    <div class="container marg">
-        <div class="row">
-             <!--<a href="/login">-->
-                <!--<img src="images/lijian1.jpg" class="img-responsive img_center"> </img>-->
-                <!--<div class="bj hidden-sm hidden-md"><span class="font">欢迎来到www.tingyou.xyz</span></div>-->
-            <!--</a>-->
+        <div class="template1">
+                <a class="title" th:each="about : ${abouts}" th:href="${'/getOneAbout?id='+about.id}" th:text="${'>> '+about.title}" th:id="${about.id}"></a>
 
-            <div class="template">
-                <h3>欢迎加入！</h3>
-                <form class="form" action="/addUser" method="post" enctype="multipart/form-data">
-                    <p>听友昵称:<input type="text" name="username"> </input> </p>
-
-                    <p>密码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="responsive" name="password1" id="content" th:text="${password}"> </input></p>
-
-                    <p>确认密码:<input type="password" class="responsive" name="password2"> </input></p>
-
-                    <p th:text="${message}"></p>
-                    <p><input  type="submit" value="注册"/></p>
-                </form>
-            </div>
-
-
-            </div>
+        </div>
+        <div class="template2">
+            <p class="linefeed" th:text="${activeAbout.content}"></p>
+        </div>
 
     </div>
+</div>
 
-
-
+<div th:text="${activeAbout.id}" id="aboutId" class="hidden"></div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/showArticles.js"></script>
+<script type="text/javascript">
 
+    var id=$("#aboutId").text();
+    $("#"+id).css("background-color","gainsboro");
 
+</script>
 </body>
 </html>

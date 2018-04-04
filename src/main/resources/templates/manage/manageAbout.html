@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <title>管理主页</title>
+    <title>管理关于</title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/public.css"/>
 
@@ -13,39 +13,28 @@
 <body class="aboutManage">
 
 <style type="text/css">
-    .form {
-        padding: 0px auto;
-    }
-    p{
-        width: 50%;
-        margin: 10px auto;
-    }
 
-    .center{
-        text-align: center;
-    }
 </style>
 
 
 <div class="marg">
     <div class="container">
         <div class="row">
-            <div class="template center">
-                <h3>管理主页</h3>
+            <div class="template">
+                <h4><a href="/manageGoMain">回到管理主页>></a></h4>
+            </div>
+            <div class="template">
+                <h4><a href="/manageAddAbout">>> 新建</a></h4>
+            </div>
+            <div th:each="about : ${abouts}" class="template">
+                <h5>
+                    <a th:href="${'/maangeDoDeleteAbout?id='+about.id}" >删除</a>
+                    <a th:href="${'/manageUpdateAbout?id='+about.id}" >修改</a>
+                </h5>
+                <h4 th:text="${about.title}"></h4>
+                <p class="linefeed" th:text="${about.content}"></p>
             </div>
 
-            <div class="template">
-                <h4><a href="manageDeleteArticle">>> 删除文章</a></h4>
-            </div>
-            <div class="template">
-                <h4><a href="manageDeleteUser">>> 删除用户</a></h4>
-            </div>
-            <div class="template">
-                <h4><a href="manageBackup">>> 备份网站图片</a></h4>
-            </div>
-            <div class="template">
-                <h4><a href="manageGetAbout">>> 管理关于</a></h4>
-            </div>
         </div>
 
     </div>

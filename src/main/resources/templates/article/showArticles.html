@@ -29,6 +29,23 @@
         text-indent: 2em;
     }
 
+    .center{
+        text-align: center;
+    }
+    @media (max-width: 768px){
+        .setWidth{
+            width: 50%;
+        }
+    }
+
+
+    @media (min-width: 768px) {
+        .setWidth{
+            width: 40%;
+        }
+    }
+
+
 </style>
 
 <nav class="nav navbar-default navbar-fixed-top" id="mynav">
@@ -57,15 +74,27 @@
             <h4>注册</h4>
         </a></li>
 
+        <li><a href="/about">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>关于</h4>
+        </a></li>
     </ul>
 </nav>
 <div class="container marg">
     <div class="row">
 
-        <div th:each="item : ${articles}" class="template">
+        <div class="template">
+            <form action="/searchArticles" method="post" >
+                <input class="setWidth" type="text" name="like" placeholder="请输入标题的一部分" th:value="${like}"> </input>
+
+                <input  type="submit" value="搜索"/>
+            </form>
+        </div>
+        <div id="parent">
+        <div th:each="item ,key: ${articles}" class="template">
 
             <a th:href="${'/articleContent?id=' + item.id }">
-                <h4 th:text="${item.title}">title</h4>
+                <h4 th:text="${item.title}"></h4>
             </a>
              <p th:text="${item.partContent}"></p>
             <div th:if="${item.imageNames.size() gt 0}" class="img-center" >
@@ -83,14 +112,21 @@
                 <div class="clear"></div>
             </div>
         </div>
-
+        </div>
+        <div class="template center">
+            <input type="button" id="getMore" value="更多"/>
+        </div>
     </div>
 </div>
-
-
+<span class="hidden" th:text="${like}" id="like"></span>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/showArticles.js"></script>
 
+<script type="text/javascript">
+
+
+
+</script>
 </body>
 </html>

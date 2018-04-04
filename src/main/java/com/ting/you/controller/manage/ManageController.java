@@ -1,4 +1,4 @@
-package com.ting.you.controller;
+package com.ting.you.controller.manage;
 
 import com.ting.you.global.GlobalMy;
 import com.ting.you.pojo.Article;

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,22 +30,21 @@ public class ArticleController {
     UserService userService;
 
 
-
     @RequestMapping("/createArticle")
     public String createArticle(Model model, HttpServletRequest request, String title, String content) throws IOException {
 
-        List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("file");
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             return "redirect:/";//未登录则返回首页默认登录
         }
-            articleService.createArticle(title, content, files, user);
+        articleService.createArticle(title, content, files, user);
 
         return "redirect:showArticles";
     }
 
     @RequestMapping("/showArticles")
-    public String showArticle(HttpServletRequest request,Model model) throws IOException {
+    public String showArticle(HttpServletRequest request, Model model) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             return "redirect:/";//未登录则返回首页默认登录
@@ -57,7 +57,7 @@ public class ArticleController {
     }
 
     @RequestMapping("/addArticle")
-    public String addArticle(HttpServletRequest request,Model model) {
+    public String addArticle(HttpServletRequest request, Model model) {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
@@ -68,7 +68,7 @@ public class ArticleController {
     }
 
     @RequestMapping("/articleContent")
-    public String articleContent(HttpServletRequest request,Model model, int id) {
+    public String articleContent(HttpServletRequest request, Model model, int id) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             return "redirect:/";//未登录则返回首页默认登录
@@ -105,9 +105,46 @@ public class ArticleController {
 
     @RequestMapping("/doRibbon")
     @ResponseBody
-    public void doRibbon(HttpServletRequest request, String temp,String articleId) {
+    public void doRibbon(HttpServletRequest request, String temp, String articleId) {
         User user = (User) request.getSession().getAttribute("user");
-        articleService.doRibbon(user,temp,Integer.valueOf(articleId));
-       // return count;
+        articleService.doRibbon(user, temp, Integer.valueOf(articleId));
+        // return count;
+    }
+
+
+    @RequestMapping("/getMoreArticles")
+    @ResponseBody
+    public List<Article> getMoreArticles(HttpServletRequest request, Model model, int start, int size, String like) throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            return null;
+        }
+        List<Article> articles = new ArrayList<>();
+        if ("".equals(like)) {
+            articles = articleService.showArticlesByTemp(start, size);
+
+        }else{
+            articles = articleService.showArticlesByDescTempLike(start, size, like, "id");
+
+        }
+        return articles;
+    }
+
+    @RequestMapping("/searchArticles")
+    public String searchArticles(HttpServletRequest request, Model model, String like) throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            return "redirect:/";//未登录则返回首页默认登录
+        }
+        if ("".equals(like)) {
+            return "redirect:/showArticles";
+        } else {
+            List<Article> articles = articleService.showArticlesByDescTempLike(0, 5, like, "id");
+            model.addAttribute("articles", articles);
+            model.addAttribute("user", user);
+            model.addAttribute("like", like);
+        }
+
+        return "article/showArticles";
     }
 }

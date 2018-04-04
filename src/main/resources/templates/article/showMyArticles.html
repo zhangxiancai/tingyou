@@ -30,6 +30,9 @@
         float: left;
         padding: 2px;
     }
+    .backColor{
+        background-color: gainsboro
+    }
 </style>
 <!--<div class="modal fade" tabindex="-1" role="dialog" id="myModal">-->
     <!--<div class="modal-dialog" role="document">-->
@@ -73,7 +76,10 @@
             <!--<span class="glyphicon glyphicon-home"></span>-->
             <h4>注册</h4>
         </a></li>
-
+        <li><a href="/about">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>关于</h4>
+        </a></li>
     </ul>
 </nav>
 <div class="container marg">
@@ -87,7 +93,7 @@
                 <h4 th:text="${item.title}">title</h4>
             </a>
            <div th:if="${user.id ne 0}">
-               <a th:href="'/deleteArticle?id=' + ${item.id}" class="f-right">删除</a>
+               <a th:href="'/deleteArticle?id=' + ${item.id}" class="f-right backColor">删除</a>
                <div class="clear"></div>
            </div>
             <p th:text="${item.partContent}"></p>

@@ -12,8 +12,15 @@ public interface ArticleMapper {
     @Select("SELECT * FROM article WHERE id=#{id}")
     Article selectById(int id);
 
-    @Select("SELECT * FROM article")
+    @Select("SELECT * FROM article order by id desc limit 0,5")
     List<Article> selectAll();
+
+    @Select("SELECT * FROM article order by id desc limit #{start},#{size}")
+    List<Article> selectAllByTemp(@Param("start") int start,@Param("size") int size);
+
+
+    @Select("SELECT * FROM article where title like '%${like}%' order by id desc limit #{start},#{size}")//id属性暂时固定
+    List<Article> selectAllByDescTempLike(@Param("start") int start,@Param("size") int size,@Param("like") String like,@Param("desc") String desc);
 
     @Update("update article set content=#{content},title=#{title},userId=#{userId} where id =#{id}")
     Boolean update(@Param("title") String title, @Param("content") String content,@Param("userId") int userId, @Param("id") int id);

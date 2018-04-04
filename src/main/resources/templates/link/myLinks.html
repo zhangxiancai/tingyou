@@ -11,6 +11,11 @@
 
 </head>
 <body class="about">
+<style type="text/css">
+    .backColor{
+        background-color: gainsboro;
+    }
+</style>
 <nav class="nav navbar-default navbar-fixed-top" id="mynav">
     <div class="navbar-header">
         <button class="btn navbar-toggle" data-toggle="collapse" data-target="#menu">
@@ -35,7 +40,10 @@
             <!--<span class="glyphicon glyphicon-home"></span>-->
             <h4>注册</h4>
         </a></li>
-
+        <li><a href="/about">
+            <!--<span class="glyphicon glyphicon-home"></span>-->
+            <h4>关于</h4>
+        </a></li>
     </ul>
 </nav>
 <div class="container marg">
@@ -44,10 +52,14 @@
 
         <div th:each="item : ${links}" class="template">
 
+            <div th:if="${user.id ne 0}">
+                <a th:href="'/deleteLink?id=' + ${item.id}" class="f-right backColor">删除</a>
+                <div class="clear"></div>
+            </div>
             <a th:href="${item.link}" target="_Blank">
                 <h4 th:text="${item.content}">content</h4>
             </a>
-            <small th:text="${username}"></small>
+            <small th:text="${user.username}"></small>
         </div>
 
     </div>

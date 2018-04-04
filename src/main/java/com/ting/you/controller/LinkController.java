@@ -67,4 +67,20 @@ public class LinkController {
         model.addAttribute("user",user);
         return "link/myLinks";
     }
+    @RequestMapping("/deleteLink")
+    public String deleteLink(HttpServletRequest request,Model model,int id){
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            return "redirect:/";//未登录则返回首页默认登录
+        }
+        Link link = linkMapper.selectById(id);
+        if(user.getId()!=link.getUserId()){
+            return "redirect:/";//不是本用户返回首页
+        }
+        linkMapper.deletebyId(id);
+        List<Link> links = linkMapper.selectByUserId(user.getId());
+        model.addAttribute("links",links);
+        model.addAttribute("user",user);
+        return "link/myLinks";
+    }
 }

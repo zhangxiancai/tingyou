@@ -15,6 +15,10 @@ public interface ArticleService {
 
     List<Article> showArticles() throws IOException;
 
+    List<Article> showArticlesByTemp(int start, int end) throws IOException;
+
+    List<Article> showArticlesByDescTempLike(int start, int size, String like, String desc) throws IOException;
+
     List<Article> showMyArticles(User user) throws IOException;
 
     void deleteArticle(int articleId, User user);
