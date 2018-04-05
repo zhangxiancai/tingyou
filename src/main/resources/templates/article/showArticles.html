@@ -93,7 +93,7 @@
         <div id="parent">
         <div th:each="item ,key: ${articles}" class="template">
 
-            <a th:href="${'/articleContent?id=' + item.id }">
+            <a target="_blank" th:href="${'/articleContent?id=' + item.id }">
                 <h4 th:text="${item.title}"></h4>
             </a>
              <p th:text="${item.partContent}"></p>

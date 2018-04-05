@@ -13,7 +13,7 @@ $("#getMore").click(function () {
         success: function (articles) {
             $(articles).each(function (index, article) {
                     var article1 = "<div class='template'>\n" +
-                        "<a href='/articleContent?id='" + article.id + "'>\n" +
+                        "<a target='_blank' href='/articleContent?id=" + article.id + "'>\n" +
                         "<h4>" + article.title + "</h4>\n" +
                         "</a>\n" +
                         "<p>" + article.partContent + "</p>";
@@ -25,7 +25,7 @@ $("#getMore").click(function () {
                         for (var i = 0; i < imageNames.length; i++) {
                             article2 = article2 +
                                 "<div class='img-three'>\n" +
-                                "<img src='/userImages/'" + imageNames[i] + " alt='找不到图片' class='img-responsive'/>\n" +
+                                "<img src='/userImages/" + imageNames[i] + "' alt='找不到图片' class='img-responsive'/>\n" +
                                 "</div>\n"
 
                             ;
