@@ -1,8 +1,10 @@
 package com.ting.you.service;
 
+import com.ting.you.pojo.Ip;
 import com.ting.you.pojo.User;
 import com.ting.you.util.Result;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UserService {
@@ -16,4 +18,8 @@ public interface UserService {
     List<User> showAllUser();
 
     void removeUser(int id);
+
+    void createIpRecord(String ip, Date time);
+
+    List<Ip> showIpRecord();
 }

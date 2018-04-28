@@ -4,6 +4,7 @@ package com.ting.you.pojo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Article {
     int id;
@@ -13,7 +14,7 @@ public class Article {
     Date createTime;
     int browseCount;
     int ribbonCount;
-    List<String> imageNames;
+    List<Map<String,String>> imageNames;
     User articleUser;
     String createTimeString;
     String partContent;
@@ -68,11 +69,11 @@ public class Article {
 
 
 
-    public List<String> getImageNames() {
+    public List<Map<String,String>> getImageNames() {
         return imageNames;
     }
 
-    public void setImageNames(List<String> imageNames) {
+    public void setImageNames(List<Map<String,String>> imageNames) {
         this.imageNames = imageNames;
     }
 

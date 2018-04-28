@@ -1,18 +1,22 @@
 package com.ting.you.service.impl;
 
 import com.ting.you.dao.ArticleMapper;
+import com.ting.you.dao.IpMapper;
 import com.ting.you.dao.LinkMapper;
 import com.ting.you.dao.UserMapper;
 import com.ting.you.pojo.Article;
+import com.ting.you.pojo.Ip;
 import com.ting.you.pojo.Link;
 import com.ting.you.pojo.User;
 import com.ting.you.service.ArticleService;
 import com.ting.you.service.UserService;
+import com.ting.you.util.DateUtil;
 import com.ting.you.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,6 +33,10 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     LinkMapper linkMapper;
+
+    @Autowired
+    IpMapper ipMapper;
+
     @Override
     public Result registerUser(String username, String password1, String password2) {
 
@@ -93,5 +101,18 @@ public class UserServiceImpl implements UserService{
             linkMapper.deletebyId(link.getId());
         }
          userMapper.deletebyId(id);
+    }
+    @Override
+    public void createIpRecord(String ip, Date time) {
+        ipMapper.insert(ip,time);
+    }
+
+    @Override
+    public List<Ip> showIpRecord() {
+        List<Ip> ips=ipMapper.selectAll();
+        for (Ip ip: ips) {
+            ip.setStringTime(DateUtil.changeDate(ip.getTime(),"yyyy-MM-dd ahh:mm:ss"));
+        }
+        return ips;
     }
 }

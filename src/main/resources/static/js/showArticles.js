@@ -23,12 +23,21 @@ $("#getMore").click(function () {
                     if (imageNames.length != 0) {
                         article2 = "<div class='img-center'>";
                         for (var i = 0; i < imageNames.length; i++) {
-                            article2 = article2 +
-                                "<div class='img-three'>\n" +
-                                "<img src='/userImages/" + imageNames[i] + "' alt='找不到图片' class='img-responsive'/>\n" +
-                                "</div>\n"
+                            if(imageNames[i].type=='image'){
+                                article2 = article2 +
+                                    "<div class='img-three'>\n" +
+                                    "<img src='/userImages/" + imageNames[i] + "' alt='找不到图片' class='img-responsive'/>\n" +
+                                    "</div>\n"
+                                ;
+                            }
+                            if(imageNames[i].type=='video'){
+                                article2 = article2 +
+                                    "<div class='img-three'>\n" +
+                                    "<video src='/userImages/" + imageNames[i] + "' alt='找不到视频' class='img-responsive'controls='controls'/>\n" +
+                                    "</div>\n"
+                                ;
+                            }
 
-                            ;
                         }
                         article2 = article2 + "<div class='clear'></div>\n" + "</div>";
                     }

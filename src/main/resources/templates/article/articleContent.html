@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <title th:text="${article.title}"></title>
+    <title th:text="${article.title}+'-听友网'"></title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/public.css"/>
 
@@ -122,7 +122,9 @@
 
             <p class="linefeed" th:text="${article.content}"></p>
             <div th:each="imageName : ${article.imageNames}" class="marg">
-                <img th:src="${'/userImages/' + imageName}" alt="找不到图片" class="img-responsive wid"/>
+                <img th:if="${imageName.type == 'image'}" th:src="${'/userImages/' + imageName.imageName}" alt="找不到图片" class="img-responsive wid"/>
+                <video th:if="${imageName.type == 'video'}" th:src="${'/userImages/' + imageName.imageName}" class="img-responsive wid" controls="controls">找不到视频</video>
+
             </div>
         </div>
 

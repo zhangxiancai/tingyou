@@ -4,6 +4,8 @@ import com.ting.you.dao.LinkMapper;
 import com.ting.you.dao.UserMapper;
 import com.ting.you.pojo.Link;
 import com.ting.you.pojo.User;
+import com.ting.you.service.UserService;
+import com.ting.you.util.Verify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +22,12 @@ public class LinkController {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserService userService;
     @RequestMapping("/showLinks")
     public String showLinks(HttpServletRequest request,Model model) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            return "redirect:/";//未登录则返回首页默认登录
-        }
+        User user = Verify.verify(request,userService);
         List<Link> links = linkMapper.selectAll();
         for (Link link:links) {
             User user1 =userMapper.selectById(link.getUserId());

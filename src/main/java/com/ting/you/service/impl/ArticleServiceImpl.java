@@ -16,9 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -149,7 +147,7 @@ public class ArticleServiceImpl implements ArticleService {
         String date1 = sdf.format(date);//设置特定格式时间字符串
 
         article.setCreateTimeString(date1);
-        article.setImageNames(imageNames);
+        article.setImageNames(changeImageName(imageNames));
         article.setArticleUser(userMapper.selectById(article.getUserId()));
         return article;
     }
@@ -192,7 +190,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         article.setArticleUser(userMapper.selectById(article.getUserId()));//设置文章用户
         article.setCreateTimeString(date1);
-        article.setImageNames(imageNames);
+        article.setImageNames(changeImageName(imageNames));//
         if (content.length() > 75) {
             article.setPartContent(content.substring(0, 75) + "...");
         } else {
@@ -201,5 +199,37 @@ public class ArticleServiceImpl implements ArticleService {
         return article;
     }
 
+    private List<Map<String,String>> changeImageName(List<String> imageNames) {
+        if(imageNames==null){
+            return null;
+        }
+        List<Map<String,String>> maps=new ArrayList<>();
+        for (String imageName : imageNames) {
 
+            Map<String,String> map = new HashMap<>();
+            map.put("imageName",imageName);
+            map.put("type",getImageType(imageName));
+            maps.add(map);
+        }
+        return maps;
+    }
+
+    private String getImageType(String imageName) {
+            String[] items = imageName.split("\\.");
+            String key = items[items.length-1];
+            String type ="image";
+          switch(key){
+              case "mp4":
+                  type="video";
+                  break;
+              case "ogg":
+                  type="video";
+                  break;
+              case "avi":
+                  type="video";
+                  break;
+          }
+
+          return type;
+    }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <title th:if="${user!=null}" th:text="${user.username}+'的所有文章'"></title>
+    <title th:if="${user!=null}" th:text="${user.username}+'的所有文章-听友网'"></title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/public.css"/>
 
@@ -99,7 +99,10 @@
             <p th:text="${item.partContent}"></p>
             <div th:if="${item.imageNames.size() gt 0}" class="img-center" >
                 <div class="img-three"  th:each="imageName : ${item.imageNames}">
-                    <img th:src="${'/userImages/' + imageName}" alt="找不到图片" class="img-responsive"/>
+
+                    <img th:if="${imageName.type=='image'}" th:src="${'/userImages/' + imageName.imageName}" alt="找不到图片" class="img-responsive"/>
+                    <video th:if="${imageName.type=='video'}" th:src="${'/userImages/' + imageName.imageName}" alt="找不到视频" class="img-responsive" controls="controls"/>
+
                 </div>
                 <div class="clear"></div>
             </div>

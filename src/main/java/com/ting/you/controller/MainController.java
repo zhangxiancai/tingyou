@@ -2,6 +2,7 @@ package com.ting.you.controller;
 
 import com.ting.you.pojo.User;
 import com.ting.you.service.UserService;
+import com.ting.you.util.Verify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +17,8 @@ public class MainController {
 
     @RequestMapping("/")
     public String getMain(HttpServletRequest request, Model model){
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null){
-            user= userService.showById(0);//默认账户
-            request.getSession().setAttribute("user",user);
-        }
+        User user=Verify.verify(request,userService);
         model.addAttribute("user",user);
-
         return "main";
     }
 

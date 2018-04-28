@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <title>管理关于-听友网</title>
+    <title>查看访问记录-听友网</title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/public.css"/>
 
@@ -13,7 +13,17 @@
 <body class="aboutManage">
 
 <style type="text/css">
+    .form {
+        padding: 0px auto;
+    }
+    p{
+        width: 50%;
+        margin: 10px auto;
+    }
 
+    .tableRow{
+        margin-top: 5px;
+    }
 </style>
 
 
@@ -23,16 +33,20 @@
             <div class="template">
                 <h4><a href="/manageGoMain">回到管理主页>></a></h4>
             </div>
+
             <div class="template">
-                <h4><a href="/manageAddAbout">>> 新建</a></h4>
-            </div>
-            <div th:each="about : ${abouts}" class="template">
-                <h5>
-                    <a th:href="${'/maangeDoDeleteAbout?id='+about.id}" >删除</a>
-                    <a th:href="${'/manageUpdateAbout?id='+about.id}" >修改</a>
-                </h5>
-                <h4 th:text="${about.title}"></h4>
-                <p class="linefeed" th:text="${about.content}"></p>
+            <table>
+               <tr>
+                   <th>ID</th>
+                   <th>IP</th>
+                   <th>TIME</th>
+               </tr>
+                <tr th:each="ip : ${ips}" class="tableRow">
+                    <td th:text="${ip.id}+'&emsp;&emsp;'"></td>
+                    <td th:text="${ip.ip}+'&emsp;&emsp;'"></td>
+                    <td th:text="${ip.stringTime}+'  '"></td>
+                </tr>
+            </table>
             </div>
 
         </div>

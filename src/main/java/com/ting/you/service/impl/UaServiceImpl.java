@@ -112,7 +112,7 @@ public class UaServiceImpl implements UaService {
             return null;
         }
         Date date =uaComment.getCreateTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd ahh:mm");
         String date1 =sdf.format(date);
         User user=userMapper.selectById(uaComment.getUserId());
 

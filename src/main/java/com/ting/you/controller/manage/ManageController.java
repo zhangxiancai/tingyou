@@ -3,6 +3,7 @@ package com.ting.you.controller.manage;
 import com.ting.you.global.GlobalMy;
 import com.ting.you.pojo.Article;
 import com.ting.you.pojo.ArticleImage;
+import com.ting.you.pojo.Ip;
 import com.ting.you.pojo.User;
 import com.ting.you.service.ArticleService;
 import com.ting.you.service.MediaService;
@@ -108,5 +109,16 @@ public class ManageController {
 
         return "manage/deleteUser";
     }
-
+    @RequestMapping("/showIpRecord")
+    public String showIpRecord(HttpServletRequest request,Model model) throws IOException {
+        String key = (String)request.getSession().getAttribute("permission");
+        if (key == null) {
+            return "redirect:/manage";//未登录则返回登录页登录
+        }
+        List<Ip> ips= userService.showIpRecord();
+        List<User> users = userService.showAllUser();
+        model.addAttribute("users",users);
+        model.addAttribute("ips",ips);
+        return "manage/showIpRecord";
+    }
 }
