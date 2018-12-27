@@ -2,6 +2,7 @@
 听友网源码
 
 部署配置：
+
 1 环境变量
 MYSQL_IP='your mysql ip';
 MYSQL_PASSWORD='your mysql password';
